@@ -17,10 +17,9 @@ spec:
       hostIPC: true
       containers:
       - name: wazuh-agent
-        image: kennyopennix/wazuh-agent:latest
+        image: caffeine01/wazuh-agent:v4.9.2
         livenessProbe:
-          httpGet:
-            path: /healz
+          tcpSocket:
             port: 5000
           initialDelaySeconds: 40
           periodSeconds: 10
@@ -48,7 +47,7 @@ spec:
             fieldRef:
               fieldPath: spec.nodeName
         - name: WAZUH_GROUPS
-          value: "demo"
+          value: "default"
         - name: JOIN_MANAGER_USER
           valueFrom:
            secretKeyRef:
